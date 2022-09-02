@@ -8,7 +8,7 @@ form.addEventListener('input', throttle(onFormListener, 500));
 form.addEventListener('submit', onFormSubmit);
 
 const FEEDBACK_FROM_STATE = 'feedback-form-state';
-const textObj = {};
+const textObj = { email: '', message: '' };
 
 const getFromLocStore = JSON.parse(
   localStorage.getItem(FEEDBACK_FROM_STATE)

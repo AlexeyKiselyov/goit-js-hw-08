@@ -10,8 +10,9 @@ const galleryBox = document.querySelector('.gallery');
 
 function createGalalery(arr) {
   const galleryStr = arr
-    .map(({ preview, original, description }) => {
-      return `  
+    .map(
+      ({ preview, original, description }) =>
+        `  
     <a class="gallery__item" href="${original}">
       <img
         class="gallery__image"
@@ -19,8 +20,8 @@ function createGalalery(arr) {
         alt="${description}"        
       />
     </a>
-`;
-    })
+`
+    )
     .join('');
   galleryBox.insertAdjacentHTML('beforeend', galleryStr);
 }
