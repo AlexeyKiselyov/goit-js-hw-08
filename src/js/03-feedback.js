@@ -4,7 +4,7 @@ const form = document.querySelector('.feedback-form');
 const inputEmail = document.querySelector('[name="email"]');
 const textarea = document.querySelector('[name="message"]');
 
-form.addEventListener('input', onFormListener);
+form.addEventListener('input', throttle(onFormListener, 500));
 form.addEventListener('submit', onFormSubmit);
 
 const FEEDBACK_FROM_STATE = 'feedback-form-state';
@@ -18,11 +18,15 @@ inputEmail.value = getFromLocStore.email;
 textarea.value = getFromLocStore.message;
 
 function onFormListener(e) {
-  const {
-    elements: { email, message },
-  } = e.currentTarget;
-  textObj.email = email.value;
-  textObj.message = message.value;
+  console.dir(e.target);
+
+  if (e.target.name === 'email') {
+    textObj.email = e.target.value;
+  }
+  if (e.target.name === 'message') {
+    textObj.message = e.target.value;
+  }
+
   const textObjToString = JSON.stringify(textObj);
   localStorage.setItem(FEEDBACK_FROM_STATE, textObjToString);
 }
