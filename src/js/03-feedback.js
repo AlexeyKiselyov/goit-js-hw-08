@@ -8,14 +8,13 @@ form.addEventListener('input', throttle(onFormListener, 500));
 form.addEventListener('submit', onFormSubmit);
 
 const FEEDBACK_FROM_STATE = 'feedback-form-state';
-const textObj = { email: '', message: '' };
+const textObj = JSON.parse(localStorage.getItem(FEEDBACK_FROM_STATE)) || {
+  email: '',
+  message: '',
+};
 
-const getFromLocStore = JSON.parse(
-  localStorage.getItem(FEEDBACK_FROM_STATE)
-) || { email: '', message: '' };
-
-inputEmail.value = getFromLocStore.email;
-textarea.value = getFromLocStore.message;
+inputEmail.value = textObj.email;
+textarea.value = textObj.message;
 
 function onFormListener(e) {
   textObj[e.target.name] = e.target.value;
